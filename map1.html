@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="map12.css">
+  <title>Show Coordinates on Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    /* Set the height of the map container */
+    #map {
+      height: 400px;
+      margin-bottom: 20px;
+    }
+
+    /* Style the prompt inputs */
+    .prompt-input {
+      margin-bottom: 10px;
+    }
+
+    /* Style the submit button */
+    .submit-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
+  <div class="main"></div>
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <div class="prompt-input">
+    <label for="latitude">Latitude:</label>
+    <input type="text" id="latitude" placeholder="Enter latitude" />
+  </div>
+
+  <div class="prompt-input">
+    <label for="longitude">Longitude:</label>
+    <input type="text" id="longitude" placeholder="Enter longitude" />
+  </div>
+
+  <button class="submit-btn" onclick="showCoordinatesOnMap()">Show on Map</button>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    function showCoordinatesOnMap() {
+      const latitude = parseFloat(document.getElementById("latitude").value);
+      const longitude = parseFloat(document.getElementById("longitude").value);
+
+      const map = L.map('map').setView([latitude, longitude], 10);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      const marker = L.marker([latitude, longitude]).addTo(map);
+    }
+  </script>
+</body>
+</html>
